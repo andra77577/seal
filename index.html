@@ -1,61 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seal Project - SUI Wallet Connect</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Web3 Portfolio</title>
   <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --card-bg: #fff;
+      --nav-bg: #0072ff;
+      --nav-text: #fff;
+    }
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --card-bg: #1e1e1e;
+      --nav-bg: #1a1a1a;
+      --nav-text: #ffcc00;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
+      background: var(--bg-color);
+      color: var(--text-color);
       font-family: Arial, sans-serif;
+      transition: all 0.4s ease;
+    }
+    nav {
+      background: var(--nav-bg);
+      padding: 15px;
       text-align: center;
-      padding: 50px;
-      background: #f0f0f0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    h1 {
-      color: #333;
+    nav a {
+      color: var(--nav-text);
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      background: #4CAF50;
-      color: white;
-      border-radius: 5px;
+    nav a:hover { color: #ffcc00; }
+    .dark-toggle {
+      float: right;
+      margin-right: 20px;
       cursor: pointer;
+      color: var(--nav-text);
+      font-size: 18px;
     }
-    button:hover {
-      background: #45a049;
+    section {
+      display: none;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      animation: fadeIn 0.5s ease;
     }
-    #walletAddress {
-      margin-top: 20px;
-      color: #444;
-      word-break: break-word;
+    section.active { display: block; }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, background 0.4s ease;
+    }
+    .card:hover { transform: translateY(-5px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--nav-bg);
+      color: var(--nav-text);
+      margin-top: 40px;
+    }
+    @media(max-width: 600px) {
+      nav a { display: block; margin: 10px 0; }
+      .dark-toggle { float: none; display: block; margin: 10px auto; }
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome to Seal Project</h1>
-  <p>Your deployment is successful!</p>
+<nav>
+  <span class="dark-toggle" onclick="toggleDark()">🌙</span>
+  <a href="#" onclick="showSection('portfolio')">Portfolio</a>
+  <a href="#" onclick="showSection('comingsoon')">Coming Soon</a>
+  <a href="#" onclick="showSection('showcase')">Showcase</a>
+  <a href="#" onclick="showSection('contact')">Contact</a>
+</nav>
 
-  <button onclick="connectSuiWallet()">Connect SUI Wallet</button>
-  <div id="walletAddress"></div>
+<section id="portfolio" class="active">
+  <h2>My Web3 Portfolio</h2>
+  <div class="card">
+    <h3>Seal Project</h3>
+    <p>Smart Contract interaction and Web3 deployment on Sui Testnet.</p>
+  </div>
+  <div class="card">
+    <h3>Redundex Demo</h3>
+    <p>Encrypted storage system with Sui blockchain backend.</p>
+  </div>
+</section>
 
-  <script>
-    async function connectSuiWallet() {
-      if (window.suiWallet) {
-        try {
-          const accounts = await window.suiWallet.request({ method: 'sui_connect' });
-          document.getElementById('walletAddress').innerHTML = 
-            `Wallet Connected:<br>Address: ${accounts.accounts[0].address}`;
-        } catch (error) {
-          alert(`Connection failed: ${error.message}`);
-        }
-      } else {
-        alert("SUI Wallet not detected! Silakan install dan aktifkan Sui Wallet di browser kamu.");
-      }
-    }
-  </script>
+<section id="comingsoon">
+  <h2>Coming Soon!</h2>
+  <div class="card">
+    <p>Exciting Web3 projects are on the way. Stay tuned!</p>
+  </div>
+</section>
+
+<section id="showcase">
+  <h2>Project Showcase</h2>
+  <div class="card">
+    <h3>Seal DApp</h3>
+    <p>A decentralized app built on Sui Testnet smart contracts.</p>
+  </div>
+  <div class="card">
+    <h3>Subscription Service</h3>
+    <p>A service offering token-based access for Web3 users.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <div class="card">
+    <p>Email: yourname@example.com</p>
+    <p>Telegram: @yourusername</p>
+    <p>GitHub: <a href="https://github.com/yourusername" target="_blank">yourusername</a></p>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 My Web3 Site — Built with love on Sui Testnet.
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  function toggleDark() {
+    document.body.classList.toggle('dark');
+  }
+</script>
 
 </body>
 </html>
