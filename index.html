@@ -1,98 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web3 Portfolio</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-            background: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #222;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #fff;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #00ffc6;
-        }
-        section {
-            padding: 50px;
-            text-align: center;
-        }
-        .project {
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 12px;
-            max-width: 500px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #222;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Web3 Portfolio</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #f2f2f2; }
+    nav { background: #111; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    .section { display: none; padding: 20px; }
+    .active { display: block; animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    .card { background: white; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 20px; margin: 20px auto; width: 90%; max-width: 400px; cursor: pointer; transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>Welcome to My Web3 Portfolio</h1>
-    <nav>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+<nav>
+  <a href="#" onclick="showSection('home')">Portfolio</a>
+  <a href="#" onclick="showSection('projects')">Projects</a>
+  <a href="#" onclick="showSection('contact')">Contact</a>
+</nav>
 
-<section id="portfolio">
-    <h2>My Web3 Portfolio</h2>
-    <div class="project">
-        <h3>Seal Project</h3>
-        <p>Smart Contract interaction and Web3 deployment on Sui Testnet.</p>
-    </div>
-    <div class="project">
-        <h3>Redundex Demo</h3>
-        <p>Encrypted storage system with Sui blockchain backend.</p>
-    </div>
-</section>
+<div id="home" class="section active">
+  <h1>My Web3 Portfolio</h1>
+  <div class="card" onclick="showSection('seal')">
+    <h2>Seal Project</h2>
+    <p>Smart Contract interaction and Web3 deployment on Sui Testnet.</p>
+  </div>
+  <div class="card" onclick="showSection('redundex')">
+    <h2>Redundex Demo</h2>
+    <p>Encrypted storage system with Sui blockchain backend.</p>
+  </div>
+</div>
 
-<section id="projects">
-    <h2>Project Showcase</h2>
-    <div class="project">
-        <h3>Coming Soon</h3>
-        <p>More Web3 projects and blockchain experiments are on the way.</p>
-    </div>
-</section>
+<div id="seal" class="section">
+  <h1>Seal Project</h1>
+  <p>Ini adalah fitur interaksi Smart Contract di jaringan Sui Testnet. Kamu bisa menguji dan deploy langsung smart contract pada environment ini.</p>
+  <button onclick="showSection('home')">Kembali</button>
+</div>
 
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Email: yourname@example.com</p>
-    <p>GitHub: @yourusername</p>
-</section>
+<div id="redundex" class="section">
+  <h1>Redundex Demo</h1>
+  <p>Redundex merupakan sistem penyimpanan terenkripsi berbasis Sui blockchain. Demo ini menunjukkan bagaimana data disimpan dan diakses aman di jaringan.</p>
+  <button onclick="showSection('home')">Kembali</button>
+</div>
 
-<footer>
-    <p>© 2025 My Web3 Portfolio. Built with passion.</p>
-</footer>
+<div id="projects" class="section">
+  <h1>Projects Showcase</h1>
+  <p>Coming Soon...</p>
+</div>
+
+<div id="contact" class="section">
+  <h1>Contact Me</h1>
+  <p>Email: chatgpt@example.com</p>
+  <p>Username: chatgpt_ai</p>
+  <button onclick="showSection('home')">Kembali</button>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(
+      s => s.classList.remove('active')
+    );
+    document.getElementById(id).classList.add('active');
+  }
+</script>
 
 </body>
 </html>
