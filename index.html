@@ -3,29 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seal Project</title>
+  <title>Seal Project - SUI Wallet Connect</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 50px;
-      background: #f4f4f4;
+      background: #f0f0f0;
     }
     h1 {
       color: #333;
     }
     button {
-      background: #6366f1;
-      color: white;
-      border: none;
-      padding: 12px 20px;
+      padding: 10px 20px;
       font-size: 16px;
-      border-radius: 8px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
-      margin-top: 20px;
     }
     button:hover {
-      background: #4f46e5;
+      background: #45a049;
+    }
+    #walletAddress {
+      margin-top: 20px;
+      color: #444;
+      word-break: break-word;
     }
   </style>
 </head>
@@ -34,19 +38,21 @@
   <h1>Welcome to Seal Project</h1>
   <p>Your deployment is successful!</p>
 
-  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="connectSuiWallet()">Connect SUI Wallet</button>
+  <div id="walletAddress"></div>
 
   <script>
-    async function connectWallet() {
+    async function connectSuiWallet() {
       if (window.suiWallet) {
         try {
           const accounts = await window.suiWallet.request({ method: 'sui_connect' });
-          alert('Wallet connected: ' + JSON.stringify(accounts));
-        } catch (err) {
-          alert('Connection failed: ' + err.message);
+          document.getElementById('walletAddress').innerHTML = 
+            `Wallet Connected:<br>Address: ${accounts.accounts[0].address}`;
+        } catch (error) {
+          alert(`Connection failed: ${error.message}`);
         }
       } else {
-        alert('SUI Wallet not detected. Please install it.');
+        alert("SUI Wallet not detected! Silakan install dan aktifkan Sui Wallet di browser kamu.");
       }
     }
   </script>
