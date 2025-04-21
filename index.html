@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seal Project</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seal Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      background: #6366f1;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #4f46e5;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Seal Project</h1>
-    <p>Your deployment is successful!</p>
-    <p>Edit this page in <code>index.html</code> and redeploy.</p>
+
+  <h1>Welcome to Seal Project</h1>
+  <p>Your deployment is successful!</p>
+
+  <button onclick="connectWallet()">Connect Wallet</button>
+
+  <script>
+    async function connectWallet() {
+      if (window.suiWallet) {
+        try {
+          const accounts = await window.suiWallet.request({ method: 'sui_connect' });
+          alert('Wallet connected: ' + JSON.stringify(accounts));
+        } catch (err) {
+          alert('Connection failed: ' + err.message);
+        }
+      } else {
+        alert('SUI Wallet not detected. Please install it.');
+      }
+    }
+  </script>
+
 </body>
 </html>
